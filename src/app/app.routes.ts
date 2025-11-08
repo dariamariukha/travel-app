@@ -10,5 +10,3 @@ export const routes: Routes = [
   { path: 'about', component: About },
   { path: '**', redirectTo: 'home' }
 ];
-
-console.log('✅ ROUTES LOADED', routes);
