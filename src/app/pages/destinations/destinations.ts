@@ -16,5 +16,3 @@ export class Destinations {
     { name: 'Vienna', description: 'Classical music and imperial architecture.' }
   ];
 }
-
-
