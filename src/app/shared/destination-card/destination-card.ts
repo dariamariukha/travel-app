@@ -9,3 +9,4 @@ import { Component, Input } from '@angular/core';
 export class DestinationCard {
   @Input() destination: any;
 }
+

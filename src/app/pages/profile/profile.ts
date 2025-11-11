@@ -17,3 +17,4 @@ export class Profile {
     this.router.navigate(['/login']);
   }
 }
+

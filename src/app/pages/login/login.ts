@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -24,16 +24,7 @@ export class Login {
   onSubmit() {
     const { username, password } = this.loginForm.value;
 
-    const storedUser = localStorage.getItem('user');
-
-    if (!storedUser) {
-      this.errorMessage = 'No registered users found. Please register first.';
-      return;
-    }
-
-    const user = JSON.parse(storedUser);
-
-    if (user.username === username && user.password === password) {
+    if (username === 'admin' && password === '12345') {
       localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['/profile']);
     } else {
