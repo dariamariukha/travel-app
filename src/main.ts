@@ -12,4 +12,3 @@ bootstrapApplication(App, {
   ]
 }).catch((err) => console.error(err));
 
-console.log('✅ APP BOOTSTRAPPED');
