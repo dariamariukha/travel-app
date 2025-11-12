@@ -1,0 +1,30 @@
+<div class="checkout-container">
+  <h2>Proceed to Checkout</h2>
+
+  <div class="checkout-content">
+    <div class="summary-box">
+      <h3>Order Summary</h3>
+      <p>Total: <strong>{{ total | currency:'USD' }}</strong></p>
+    </div>
+
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+      <label>Name</label>
+      <input type="text" formControlName="name" placeholder="Enter your name" />
+
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Enter your email" />
+
+      <label>Payment Method</label>
+      <select formControlName="payment">
+        <option value="">-- Select Payment Method --</option>
+        <option value="card">Credit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">Cash on Arrival</option>
+      </select>
+
+      <button type="submit" [disabled]="!checkoutForm.valid" class="confirm-btn">
+        Confirm Booking
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="cart-container">
+  <h2>Your Cart</h2>
+
+  <div *ngIf="cart.length === 0" class="empty-cart">
+    <img src="assets/emty-card.jpg" alt="Empty cart" />
+    <p>Your cart is empty.</p>
+    <a routerLink="/destinations" class="browse-btn">Browse Tours</a>
+  </div>
+
+  <div *ngIf="cart.length > 0" class="cart-content">
+    <div class="cart-items">
+      <div *ngFor="let tour of cart" class="cart-item">
+        <img [src]="tour.image" [alt]="tour.title" />
+        <div class="info">
+          <h3>{{ tour.title }}</h3>
+          <p><strong>{{ tour.country }}</strong></p>
+          <p>Price: {{ tour.price | currency:'USD' }}</p>
+          <button (click)="removeTour(tour.id)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <p>Total: <strong>{{ total | currency:'USD' }}</strong></p>
+      <button (click)="clearCart()" class="clear-btn">Clear Cart</button>
+      <button routerLink="/checkout" class="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>

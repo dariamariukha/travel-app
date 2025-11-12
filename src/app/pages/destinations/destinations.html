@@ -1,7 +1,46 @@
-<h2>Popular Destinations</h2>
-<div class="cards">
-  <app-destination-card
-    *ngFor="let d of destinations"
-    [destination]="d">
-  </app-destination-card>
+<div class="destinations-container">
+  <div class="filters">
+    <h3>Filter Tours</h3>
+
+    <div class="filter-section">
+      <label><strong>By Country:</strong></label>
+      <div class="checkbox-list">
+        <label *ngFor="let c of countries">
+          <input
+            type="checkbox"
+            [checked]="selectedCountries.includes(c)"
+            (change)="toggleCountry(c)"
+          />
+          {{ c }}
+        </label>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <label><strong>By Price:</strong></label>
+      <div class="price-inputs">
+        <input type="number" placeholder="Min" [(ngModel)]="minPrice" (input)="applyFilters()" />
+        <span>–</span>
+        <input type="number" placeholder="Max" [(ngModel)]="maxPrice" (input)="applyFilters()" />
+      </div>
+    </div>
+    <button (click)="resetFilters()" class="reset-btn">Reset Filters</button>
+  </div>
+
+  
+  <div class="tours">
+    <div *ngFor="let tour of filteredTours" class="tour-card">
+      <img [src]="tour.image" [alt]="tour.title" />
+      <div class="info">
+        <h3><a [routerLink]="['/tour', tour.id]">{{ tour.title }}</a></h3>
+        <p><strong>{{ tour.country }}</strong></p>
+        <p>{{ tour.duration }}</p>
+        <p><strong>{{ tour.price | currency:'USD' }}</strong></p>
+        <p class="description">{{ tour.description }}</p>
+      </div>
+      <div class="btn-container">
+        <button (click)="addToCart(tour)" class="add-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
 </div>

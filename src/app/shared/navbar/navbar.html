@@ -1,7 +1,26 @@
 <nav class="navbar">
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <a routerLink="/destinations" routerLinkActive="active">Destinations</a>
-  <a routerLink="/about" routerLinkActive="active">About</a>
-   <a routerLink="/login" routerLinkActive="active">Login</a>
-  <a routerLink="/profile" routerLinkActive="active">Profile</a>
+  <div class="nav-left">
+    <a routerLink="/home" class="logo">🌍 TravelEase</a>
+  </div>
+
+  <div class="nav-center">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/destinations" routerLinkActive="active">Destinations</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+  </div>
+
+  <div class="nav-right">
+    <ng-container *ngIf="!auth.isLoggedIn()">
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register" class="highlight">Register</a>
+    </ng-container>
+
+    <ng-container *ngIf="auth.isLoggedIn()">
+      <a routerLink="/cart" routerLinkActive="active">Cart</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a *ngIf="isAdmin()" routerLink="/manage-tours">🛠 Manage Tours</a>
+      <a (click)="logout()" class="logout">Logout</a>
+    </ng-container>
+  </div>
 </nav>
+
