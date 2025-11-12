@@ -1,0 +1,149 @@
+.cart-container {
+  background: linear-gradient(180deg, #f3f9ff 0%, #e9f1f8 100%);
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1b4965;
+}
+
+.empty-cart {
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 40px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.empty-cart img {
+  width: 180px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.empty-cart p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.browse-btn {
+  background: #0077b6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.browse-btn:hover {
+  background: #005f8d;
+}
+
+.cart-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.cart-items {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 15px;
+  gap: 15px;
+  transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-3px);
+}
+
+.cart-item img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item .info h3 {
+  margin: 0;
+  color: #1b4965;
+}
+
+.cart-item button {
+  margin-top: 10px;
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-item button:hover {
+  background: #b52b27;
+}
+
+.cart-summary {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 20px;
+  height: fit-content;
+}
+
+.cart-summary h3 {
+  text-align: center;
+  color: #1b4965;
+}
+
+.cart-summary p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.clear-btn, .checkout-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.clear-btn {
+  background: #6c757d;
+}
+
+.clear-btn:hover {
+  background: #5a6268;
+}
+
+.checkout-btn {
+  background: #2e8b57;
+}
+
+.checkout-btn:hover {
+  background: #256b45;
+}
+

@@ -1,0 +1,73 @@
+<div class="manage-container" *ngIf="isAdmin; else noAccess">
+  <h2>{{ isEditing ? 'Edit Tour' : 'Add New Tour' }}</h2>
+
+  <form [formGroup]="tourForm" (ngSubmit)="onSubmit()" class="tour-form">
+    <label>Title:</label>
+  <input type="text" formControlName="title" />
+  <div *ngIf="tourForm.get('title')?.invalid && tourForm.get('title')?.touched" class="error">
+    Title must have at least 3 letters
+  </div>
+
+    <label>Country:</label>
+  <input type="text" formControlName="country" />
+  <div *ngIf="tourForm.get('country')?.invalid && tourForm.get('country')?.touched" class="error">
+    Country must have at least 2 letters
+  </div>
+
+    <label>Description:</label>
+  <textarea formControlName="description"></textarea>
+  <div *ngIf="tourForm.get('description')?.invalid && tourForm.get('description')?.touched" class="error">
+    Description must be at least 10 characters
+  </div>
+
+    <label>Details</label>
+    <textarea formControlName="details"></textarea>
+
+    <label>Price (USD):</label>
+  <input type="text" formControlName="price" />
+  <div *ngIf="tourForm.get('price')?.invalid && tourForm.get('price')?.touched" class="error">
+    Price must be a number
+  </div>
+
+    <label>Duration:</label>
+  <input type="text" formControlName="duration" placeholder="e.g., 5 days" />
+  <div *ngIf="tourForm.get('duration')?.invalid && tourForm.get('duration')?.touched" class="error">
+    Duration must include a number and word "days"
+  </div>
+
+     <label>Image file name:</label>
+  <input type="text" formControlName="image" placeholder="e.g., paris.jpg" />
+  <div *ngIf="tourForm.get('image')?.invalid && tourForm.get('image')?.touched" class="error">
+    Image name is required
+  </div>
+
+    <button type="submit" [disabled]="tourForm.invalid">
+      {{ isEditing ? 'Save Changes' : 'Add Tour' }}
+    </button>
+
+    <button *ngIf="isEditing" type="button" class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+  </form>
+
+  <hr />
+
+  <h3>All Tours</h3>
+  <div class="tour-list">
+    <div *ngFor="let t of tours" class="tour-item">
+      <img [src]="t.image" alt="{{ t.title }}" />
+      <div>
+        <h4>{{ t.title }}</h4>
+        <p>{{ t.country }} — {{ t.price | currency:'USD' }}</p>
+      </div>
+      <div class="actions">
+        <button (click)="editTour(t)">Edit</button>
+        <button (click)="deleteTour(t.id)" class="delete">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noAccess>
+  <div class="no-access">
+    <p>You do not have permission to access this page.</p>
+  </div>
+</ng-template>

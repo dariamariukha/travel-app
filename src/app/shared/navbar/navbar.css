@@ -1,16 +1,74 @@
 .navbar {
-  background-color: #f8f8f8;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  background: linear-gradient(90deg, #0077b6, #00a8e8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 50px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.navbar a {
-  color: #007acc;
-  margin-right: 15px;
+.nav-left .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
   text-decoration: none;
 }
 
-.navbar a.active {
-  font-weight: bold;
-  text-decoration: underline;
+.nav-center a,
+.nav-right a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-center a:hover,
+.nav-right a:hover {
+  color: #caf0f8;
+  transform: scale(1.05);
+}
+
+.nav-center {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right .highlight {
+  background: #023e8a;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-left: 8px;
+  transition: background 0.3s ease;
+}
+
+.nav-right .highlight:hover {
+  background: #0077b6;
+}
+
+.logout {
+  color: #ffb3b3;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout:hover {
+  color: #ff7b7b;
+}
+
+a.active {
+  border-bottom: 2px solid #caf0f8;
+  padding-bottom: 4px;
 }

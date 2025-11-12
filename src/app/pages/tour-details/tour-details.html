@@ -1,0 +1,22 @@
+<ng-container *ngIf="tour as t; else notFound">
+  <div class="tour-details">
+    <h2>{{ t.title }}</h2>
+    <img [src]="t.image" [alt]="t.title" />
+    <p><strong>Country:</strong> {{ t.country }}</p>
+    <p><strong>Duration:</strong> {{ t.duration }}</p>
+    <p><strong>Price:</strong> {{ t.price | currency:'USD' }}</p>
+    <p>{{ t.description }}</p>
+
+    <div class="itinerary" *ngIf="t.details">
+      <h3>Tour Itinerary</h3>
+      <p>{{ t.details }}</p>
+    </div>
+
+    <button (click)="addToCart(t)" class="add-btn">Add to Cart</button>
+  </div>
+</ng-container>
+
+<ng-template #notFound>
+  <p>Tour not found.</p>
+</ng-template>
+

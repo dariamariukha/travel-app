@@ -16,17 +16,22 @@ export class Login {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
   onSubmit() {
     const { username, password } = this.loginForm.value;
 
-    if (username === 'admin' && password === '12345') {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    const foundUser = users.find((u: any) => u.username === username && u.password === password);
+
+    if (foundUser) {
       localStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate(['/profile']);
+      localStorage.setItem('currentUser', JSON.stringify(foundUser));
+      this.router.navigate(['/home']);
     } else {
       this.errorMessage = 'Invalid username or password';
     }
