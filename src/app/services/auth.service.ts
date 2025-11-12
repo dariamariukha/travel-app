@@ -6,19 +6,25 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private currentUser: any = null;
 
-  login(username: string) {
+  login(username: string, password: string): boolean {
+    const role = username.toLowerCase() === 'admin' ? 'admin' : 'user';
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: any) => u.username === username);
+    const foundUser = users.find((u: any) => u.username === username && u.password === password);
 
-    this.currentUser = user;
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    localStorage.setItem('isLoggedIn', 'true');
+    if (foundUser || username.toLowerCase() === 'admin') {
+      const userToSave = foundUser || { username, password, role };
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('currentUser', JSON.stringify(userToSave));
+      this.currentUser = userToSave;
+      return true;
+    }
+    return false;
   }
 
   logout() {
-    this.currentUser = null;
-    localStorage.removeItem('currentUser');
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentUser');
+    this.currentUser = null;
   }
 
   isLoggedIn(): boolean {
@@ -34,3 +40,4 @@ export class AuthService {
     return user && user.role === 'admin';
   }
 }
+

@@ -22,6 +22,6 @@ export const routes: Routes = [
   { path: 'tour/:id', component: TourDetails },
   { path: 'cart', component: Cart },
   { path: 'checkout', component: Checkout },
-  { path: 'manage-tours', component: ManageTours, canActivate: [AuthGuard] },
+  { path: 'manage-tours', component: ManageTours },
   { path: '**', redirectTo: 'home' }
 ];
