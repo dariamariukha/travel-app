@@ -1,20 +1,26 @@
-<h2>Register</h2>
+<div class="form-container">
+  <h2>Create Account</h2>
 
-<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-  <label>
-    Username:
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <label>Username:</label>
     <input type="text" formControlName="username" />
-  </label>
-  <br /><br />
+    <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error">
+      Username must have at least 3 letters
+    </div>
 
-  <label>
-    Password:
+    <label>Password:</label>
     <input type="password" formControlName="password" />
-  </label>
-  <br /><br />
+    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+      Password must contain at least 6 characters, one uppercase letter and one number
+    </div>
 
-  <button type="submit" [disabled]="registerForm.invalid">Register</button>
-</form>
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
 
-<p *ngIf="message" style="color: green">{{ message }}</p>
-<p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+  <p class="success" *ngIf="message">{{ message }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <p class="switch">Already have an account?</p>
+  <a routerLink="/login">Login</a>
+</div>
+

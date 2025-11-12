@@ -17,10 +17,7 @@ export class Navbar {
     this.auth.logout();
   }
 
-  isAdmin(): boolean {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) return false;
-    const user = JSON.parse(currentUser);
-    return user.role === 'admin';
+   isAdmin(): boolean {
+    return this.auth.isAdmin();
   }
 }
