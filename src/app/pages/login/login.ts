@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class Login {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -24,24 +25,17 @@ export class Login {
   onSubmit() {
     const { username, password } = this.loginForm.value;
 
-    if (username === 'admin' && password === 'Admin123') {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('role', 'admin');
-      this.router.navigate(['/manage-tours']);
+    const ok = this.auth.login(username, password);
+    if (!ok) {
+      this.errorMessage = 'Invalid username or password';
       return;
     }
 
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      const user = JSON.parse(userData);
-      if (user.username === username && user.password === password) {
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('role', 'user');
-        this.router.navigate(['/profile']);
-        return;
-      }
+    const role = localStorage.getItem('role');
+    if (role === 'admin') {
+      this.router.navigate(['/manage-tours']);
+    } else {
+      this.router.navigate(['/profile']);
     }
-
-    this.errorMessage = 'Invalid username or password';
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,11 +11,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.css'
 })
 export class Profile {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   logout() {
-    localStorage.removeItem('isLoggedIn');
+    this.auth.logout();
     this.router.navigate(['/login']);
   }
 }
-

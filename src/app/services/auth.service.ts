@@ -1,43 +1,61 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+type Role = 'admin' | 'user';
+interface CurrentUser { username: string; role: Role; }
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private currentUser: any = null;
+  private readonly KEY_IS_LOGGED_IN = 'isLoggedIn';
+  private readonly KEY_ROLE = 'role';
+  private readonly KEY_CURRENT_USER = 'currentUser';
+  private readonly KEY_REGISTERED_USER = 'user'; 
 
   login(username: string, password: string): boolean {
-    const role = username.toLowerCase() === 'admin' ? 'admin' : 'user';
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUser = users.find((u: any) => u.username === username && u.password === password);
-
-    if (foundUser || username.toLowerCase() === 'admin') {
-      const userToSave = foundUser || { username, password, role };
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', JSON.stringify(userToSave));
-      this.currentUser = userToSave;
+    if (username === 'admin' && password === 'Admin123') {
+      const user: CurrentUser = { username, role: 'admin' };
+      localStorage.setItem(this.KEY_IS_LOGGED_IN, 'true');
+      localStorage.setItem(this.KEY_ROLE, 'admin');
+      localStorage.setItem(this.KEY_CURRENT_USER, JSON.stringify(user));
       return true;
     }
+
+    const raw = localStorage.getItem(this.KEY_REGISTERED_USER);
+    if (raw) {
+      try {
+        const regUser = JSON.parse(raw) as { username: string; password: string };
+        if (regUser.username === username && regUser.password === password) {
+          const user: CurrentUser = { username, role: 'user' };
+          localStorage.setItem(this.KEY_IS_LOGGED_IN, 'true');
+          localStorage.setItem(this.KEY_ROLE, 'user');
+          localStorage.setItem(this.KEY_CURRENT_USER, JSON.stringify(user));
+          return true;
+        }
+      } catch {}
+    }
+
     return false;
   }
 
-  logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('currentUser');
-    this.currentUser = null;
+  logout(): void {
+    localStorage.removeItem(this.KEY_IS_LOGGED_IN);
+    localStorage.removeItem(this.KEY_ROLE);
+    localStorage.removeItem(this.KEY_CURRENT_USER);
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    return localStorage.getItem(this.KEY_IS_LOGGED_IN) === 'true';
   }
 
-  getCurrentUser(): any {
-    return JSON.parse(localStorage.getItem('currentUser') || 'null');
+  getCurrentUser(): CurrentUser | null {
+    const raw = localStorage.getItem(this.KEY_CURRENT_USER);
+    if (!raw) return null;
+    try { return JSON.parse(raw) as CurrentUser; } catch { return null; }
   }
 
   isAdmin(): boolean {
+    const role = localStorage.getItem(this.KEY_ROLE);
+    if (role) return role === 'admin';
     const user = this.getCurrentUser();
-    return user && user.role === 'admin';
+    return !!user && user.role === 'admin';
   }
 }
-
