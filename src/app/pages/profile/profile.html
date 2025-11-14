@@ -1,3 +1,41 @@
-<h2>Welcome to your profile!</h2>
-<p>You are successfully logged in.</p>
-<button (click)="logout()">Logout</button>
+<div class="profile-container">
+  <section class="profile-header">
+    <div class="overlay"></div>
+    <div class="header-content">
+      <h1>Your Profile</h1>
+      <p>Manage your account and view your travel details</p>
+    </div>
+  </section>
+
+  <section class="profile-card">
+    <div class="profile-info">
+      <h2>👤 Account Information</h2>
+      <p><strong>Username:</strong> {{ username }}</p>
+      <p><strong>Role:</strong> 
+        <span [class.admin]="isAdmin">{{ isAdmin ? 'Administrator' : 'Traveler' }}</span>
+      </p>
+    </div>
+
+    <div class="profile-actions">
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </section>
+
+  <section class="profile-history" *ngIf="userTours && userTours.length > 0">
+    <h2>🧳 Your Booked Tours</h2>
+    <div class="tours-grid">
+      <div class="tour-card" *ngFor="let t of userTours">
+        <img [src]="t.image" [alt]="t.title">
+        <div class="tour-info">
+          <h3>{{ t.title }}</h3>
+          <p>{{ t.country }}</p>
+          <p><strong>{{ t.price | currency:'USD' }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-empty" *ngIf="!userTours || userTours.length === 0">
+    <p>You haven’t booked any tours yet.</p>
+  </section>
+</div>

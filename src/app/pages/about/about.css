@@ -1,0 +1,118 @@
+.about-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f9fafb;
+}
+
+.about-hero {
+  position: relative;
+  background: url('/assets/about.avif') center/cover no-repeat;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+.about-info {
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-info h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+}
+
+.about-info p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+.about-values {
+  background-color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.about-values h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #007bff;
+}
+
+.values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.value-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+.value-card h3 {
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.value-card p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.about-footer {
+  padding: 3rem 2rem;
+  background-color: #f0f2f5;
+  text-align: center;
+}
+
+.about-footer h2 {
+  color: #007bff;
+  margin-bottom: 1.5rem;
+}
+
+.about-footer p {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.7;
+}
