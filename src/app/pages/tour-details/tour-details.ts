@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TravelService, Tour } from '../../services/travel.service';
-import { AuthService } from '../../services/auth.service'; // ✅ додано
+import { AuthService } from '../../services/auth.service';
+import { CountryFormatPipe } from '../../pipes/country-format.pipe'; 
 
 @Component({
   selector: 'app-tour-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CountryFormatPipe],
   templateUrl: './tour-details.html',
   styleUrl: './tour-details.css'
 })
@@ -17,7 +18,7 @@ export class TourDetails {
   constructor(
     private route: ActivatedRoute,
     private travelService: TravelService,
-    private auth: AuthService // ✅ додано
+    private auth: AuthService
   ) {}
 
   ngOnInit() {

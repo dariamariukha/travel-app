@@ -2,7 +2,7 @@
   <div class="tour-details">
     <h2>{{ t.title }}</h2>
     <img [src]="t.image" [alt]="t.title" />
-    <p><strong>Country:</strong> {{ t.country }}</p>
+    <p><strong>Country:</strong> {{ tour.country | countryFormat }}</p>
     <p><strong>Duration:</strong> {{ t.duration }}</p>
     <p><strong>Price:</strong> {{ t.price | currency:'USD' }}</p>
     <p>{{ t.description }}</p>
